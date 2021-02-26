@@ -3,11 +3,8 @@ import datetime
 import requests
 import pandas as pd
 import numpy as np
+from PIL import Image
 
-
-'''
-# TaxiFareModel front
-'''
 
 st.markdown("""# Your Taxifare Predictor""")
 
@@ -38,11 +35,27 @@ params = dict(
 )
 
 ## 3. Let's call our API using the `requests` package...
-response = requests.get(url, params=params).json()
+def api(url,params):
+    print("api requested")
+    response = requests.get(url, params=params).json()
+    ## 4. Let's retrieve the prediction from the **JSON** returned by the API...
+    pred = response["prediction"]
+    ## Finally, we can display the prediction to the user
+    st.markdown(f"""# Your predicted taxi fare: {round(pred, 2)} Pesos""")
 
-## 4. Let's retrieve the prediction from the **JSON** returned by the API...
-pred = response["prediction"]
+api(url,params)
 
-## Finally, we can display the prediction to the user
-st.markdown(f"Your predicted taxi fare: {round(pred, 2)} Pesos")
+@st.cache
+def get_map_data():
+    print('get_map_data called')
+    return pd.DataFrame(
+            [[pickup_latitude, pickup_longitude]],
+            columns=['lat', 'lon']
+        )
 
+# if st.checkbox('Show map', False):
+#     df = get_map_data()
+
+st.map(get_map_data())
+# image = Image.open('images/map.png')
+# st.image(image, caption='map', use_column_width=False)
