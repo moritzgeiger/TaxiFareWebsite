@@ -3,8 +3,6 @@ import datetime
 import requests
 import pandas as pd
 import numpy as np
-from PIL import Image
-
 
 st.markdown("""# Your Taxifare Predictor""")
 
@@ -17,10 +15,10 @@ d = st.date_input("pickupdate", datetime.date(2019, 7, 6))
 t = st.time_input('pickuptime', datetime.time(8, 45))
 
 pickup_datetime = (f'{d} {t} UTC')
-pickup_longitude = st.number_input('pickup longitude')
-pickup_latitude = st.number_input('pickup latitude')
-dropoff_longitude = st.number_input('dropoff longitude')
-dropoff_latitude = st.number_input('dropoff latitude')
+pickup_longitude = st.number_input('pickup longitude', format="%.5f")
+pickup_latitude = st.number_input('pickup latitude', format="%.5f")
+dropoff_longitude = st.number_input('dropoff longitude', format="%.5f")
+dropoff_latitude = st.number_input('dropoff latitude', format="%.5f")
 passenger_count = st.selectbox('Number of passengers', list(range(1,20)))
 
 ## 2. Let's build a dictionary containing the parameters for our API...
