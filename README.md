@@ -1,4 +1,6 @@
 
+***tl;dr: This is a LeWagon Data Science Challenge. Basically a guidebook of how to deploy your own model with streamlit and push it to heroku. Very helpful!***
+
 We saw in the previous challenge how to plug a website to our **Prediction API** in order to allow regular users make prediction.
 
 Now let's create our own website ! 🔥
